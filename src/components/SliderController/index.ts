@@ -1,1 +1,1 @@
-export { SliderController } from './SliderControlle';
+export * from './SliderController';

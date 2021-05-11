@@ -2,16 +2,18 @@ import 'styled-components';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
-    palette: {
-      primary?: string;
-      font: string;
-      background: string;
-      // button: {
-      //   font: string;
-      //   background: string;
-      //   border: string;
-      // };
-      // calcDarkInRgba: (opacity: number) => string;
+    color: {
+      primary: string;
+      font: {
+        primary: string;
+        secondary: string;
+        invert: string;
+      };
+      background: {
+        primary: string;
+        secondary: string;
+        invert: string;
+      };
     };
   }
 }

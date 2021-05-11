@@ -1,28 +1,25 @@
 import { FC } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
-import GlobalStyles from './styles/GlobalStyles';
+import { GlobalStyles } from './styles/GlobalStyles';
 import { AppTheme } from './appSetup/AppTheme';
-import { Routes } from './appSetup/Routes';
-
-import { Navbar, Footer } from './components';
+import { Routes } from './router/Routes';
 import { ReduxState } from './appSetup/ReduxSetup';
+import { QueryContext } from './appSetup/QueryContext';
 
 export const App: FC = () => {
   return (
-    <ReduxState>
-      <AppTheme>
-        <>
-          <Router>
-            <Navbar />
-            <main className="main">
+    <QueryContext>
+      <ReduxState>
+        <AppTheme>
+          <>
+            <BrowserRouter>
               <Routes />
-            </main>
-            <Footer />
-          </Router>
-          <GlobalStyles />
-        </>
-      </AppTheme>
-    </ReduxState>
+            </BrowserRouter>
+            <GlobalStyles />
+          </>
+        </AppTheme>
+      </ReduxState>
+    </QueryContext>
   );
 };

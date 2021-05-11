@@ -1,1 +1,1 @@
-export { Links } from './Links';
+export * from './Links';

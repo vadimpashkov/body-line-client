@@ -8,5 +8,4 @@ export type GetMassageTypesResponse = {
   image: string;
 };
 
-export const GetMassageTypes: FetchFunc<undefined, GetMassageTypesResponse[]> = (client) =>
-  client.get('/massage-types');
+export const GetMassageTypes: FetchFunc<undefined, GetMassageTypesResponse[]> = (client) => client.get('/massagetypes');

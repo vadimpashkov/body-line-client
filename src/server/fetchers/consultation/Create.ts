@@ -1,13 +1,10 @@
 import { FetchFunc } from '../../types';
 
-type Request = {
+export type CreateConsultationRequestType = {
   phone: string;
 };
 
-export type CreateConsultationResponse = {
-  phone: string;
-  id: number;
-};
-
-export const CreateConsultation: FetchFunc<Request, CreateConsultationResponse> = (client, request) =>
-  client.post('/consultations/create', request);
+export const CreateConsultation: FetchFunc<
+  CreateConsultationRequestType,
+  undefined
+> = (client, request) => client.post('/consult', request);

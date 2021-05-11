@@ -1,90 +1,63 @@
-import { FC, useState, useRef } from 'react';
-import styled from 'styled-components';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import { device } from '../../styles/Variables';
-import { responsive, addAlpha } from '../../styles/mixins';
+import { NavbarBlock, NavbarLink, NavbarIcon } from './Navbar.elements';
 
-import { Wrapper } from '../Wrapper';
-import Menu from '../Menu';
-import Burger from '../Burger';
+import { useAccessToken } from '../../hooks';
 
-import { ReactComponent as LogoIcon } from '../../assets/icons/logo.svg';
+import IconSprite from '../../assets/menu.svg';
 
-const Blur = styled.div<HeaderProps>`
-  @media (hover: hover) {
-    position: absolute;
-    display: ${({ open }) => (open ? 'block' : 'none')};
-    width: 100%;
-    height: 100000px;
-    backdrop-filter: blur(8px);
-    background-color: ${({ theme }) => addAlpha(theme.palette.background, 0.08)};
-    z-index: 100;
-  }
-`;
-
-const Header = styled.header<HeaderProps>`
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: ${({ theme }) => theme.palette.font};
-  z-index: 200;
-
-  .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 60px;
-    color: ${({ theme }) => theme.palette.background};
-
-    @media ${device.sm} {
-      justify-content: space-between;
-    }
-  }
-
-  .logo {
-    width: ${responsive(90, 100)};
-    fill: ${({ theme }) => theme.palette.background};
-  }
-`;
-
-type HeaderProps = {
+type NavbarProps = {
   open: boolean;
+  onClick: () => void;
 };
 
-const Navbar: FC = () => {
-  const [open, setOpen] = useState(false);
-  const node = useRef();
-
-  // const [height, setHeight] = useState(0);
-  // const refHeight = useRef<HTMLDivElement>(null);
-
-  // useLayoutEffect(() => {
-  //   if (refHeight?.current?.clientHeight) {
-  //     setHeight(refHeight.current.clientHeight);
-  //   }
-  // }, [height]);
-
-  if (open) {
-    document.body.style.overflowY = 'hidden';
-  } else {
-    document.body.removeAttribute('style');
-  }
+export const Navbar: FC<NavbarProps> = ({ open, onClick }: NavbarProps) => {
+  // const [login, setLogin] = useState(false);
+  const { setToken, token } = useAccessToken();
 
   return (
-    <>
-      <Blur open={open} onClick={() => setOpen(false)}></Blur>
-      <Header open={open}>
-        <Wrapper className="wrapper" ref={node as any}>
-          <Link to="/">
-            <LogoIcon className="logo" />
-          </Link>
-          <Burger open={open} setOpen={setOpen} />
-        </Wrapper>
-        <Menu open={open} onClick={() => setOpen(false)} />
-      </Header>
-    </>
+    <NavbarBlock open={open}>
+      {/* TODO: Сделать якоря */}
+      <NavbarLink as={Link} to="/" onClick={onClick}>
+        <NavbarIcon href={IconSprite + '#masters'} />
+        Мастера
+      </NavbarLink>
+      <NavbarLink as={Link} to="/record" onClick={onClick}>
+        <NavbarIcon href={IconSprite + '#recording'} />
+        Записаться на массаж
+      </NavbarLink>
+      <NavbarLink as={Link} to="/" onClick={onClick}>
+        <NavbarIcon href={IconSprite + '#phone'} />
+        Контакты
+      </NavbarLink>
+      {!token && (
+        <NavbarLink as={Link} to="/signin" onClick={onClick}>
+          <NavbarIcon href={IconSprite + '#user'} />
+          Войти
+        </NavbarLink>
+      )}
+      {token && (
+        <NavbarLink onClick={() => setToken('')}>
+          <NavbarIcon href={IconSprite + '#sign-out'} />
+          Выйти
+        </NavbarLink>
+      )}
+      {/* {!token && (
+        <>
+          <NavbarButton as={Link} to="/signin" border onClick={onClick}>
+            Войти
+          </NavbarButton>
+          <NavbarButton as={Link} to="/signup" border onClick={onClick}>
+            Зарегистрироваться
+          </NavbarButton>
+        </>
+      )}
+      {token && (
+        <NavbarButton border onClick={() => setToken('')}>
+          Выйти
+        </NavbarButton>
+      )} */}
+    </NavbarBlock>
   );
 };
-
-export default Navbar;

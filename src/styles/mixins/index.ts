@@ -1,3 +1,5 @@
-export { pxToRem } from './pxToRem';
-export { addAlpha } from './addAlpha';
-export { responsive } from './responsive';
+export * from './colorSpeculation';
+export * from './invertColor';
+export * from './pxToRem';
+export * from './addAlpha';
+export * from './responsive';

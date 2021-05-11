@@ -1,7 +1,7 @@
 import { FC, ReactElement } from 'react';
 import { Provider } from 'react-redux';
 
-import { store } from '../reduxStore';
+import { store } from '../store';
 
 type ReduxStateProps = {
   children: ReactElement;

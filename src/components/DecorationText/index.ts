@@ -1,1 +1,1 @@
-export { default } from './DecorationText';
+export * from './DecorationText';

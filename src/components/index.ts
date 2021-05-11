@@ -1,11 +1,18 @@
-import Navbar from './Navbar';
-import Banner from './Banner';
-import AboutUs from './AboutUs';
-import Massage from './Massage';
-import Consultation from './Consultation';
-import Team from './Team';
-import Reviews from './Reviews';
-import Contacts from './Contacts';
-import Footer from './Footer';
+export * from './Icon';
+export * from './Title';
+export * from './DecorationText';
+export * from './Links';
 
-export { Navbar, Banner, AboutUs, Massage, Consultation, Team, Reviews, Contacts, Footer };
+export * from './Header';
+export * from './Footer';
+
+export * from './Banner';
+export * from './AboutUs';
+export * from './MassageTypes';
+export * from './Consultation';
+export * from './Team';
+export * from './Contacts';
+
+export * from './SignInForm';
+export * from './SignUpForm';
+export * from './RecordForm';

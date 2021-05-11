@@ -2,19 +2,13 @@ import { FetchFunc } from '../../types';
 
 export type GetMasseursResponse = {
   id: number;
-  user_id: number;
+  firstName: string;
+  lastName: string;
   occupation: string;
   description: string;
-  users: {
-    id: number;
-    role_id: number;
-    phone: string;
-    firstname: string;
-    lastname: string;
-    image: string;
-    created_at: Date;
-    updated_at: Date;
-  };
+  src: string;
 };
 
-export const GetMasseurs: FetchFunc<undefined, GetMasseursResponse[]> = (client) => client.get('/masseurs');
+export const GetMasseurs: FetchFunc<undefined, GetMasseursResponse[]> = (
+  client
+) => client.get('/massague');

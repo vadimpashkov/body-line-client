@@ -16,7 +16,7 @@ export type FetchFunc<TRequest = undefined, TData = undefined> = (
 ) => Promise<AxiosResponse<StorageAnswer<TData>>>;
 
 export type StorageAnswer<TData> = {
-  success: boolean;
-  message: string;
+  succeeded: boolean;
+  errorMessage: string;
   data: TData;
 };

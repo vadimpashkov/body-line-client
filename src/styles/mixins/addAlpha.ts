@@ -1,5 +1,5 @@
-import { hexToRgb } from './hexToRgb';
+import { hexToRgb } from './colorSpeculation';
 
-export const addAlpha = (hex: string | any, opacity: number) => {
-  return `rgba(${hexToRgb(hex)}, ${opacity})`;
+export const addAlpha = (hex: string, opacity: number) => {
+  return `rgb(${hexToRgb(hex)} / ${opacity})`;
 };

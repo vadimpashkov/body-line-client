@@ -6,4 +6,4 @@ export type GetPhotosSalonResponse = {
   alt: string;
 };
 
-export const GetPhotosSalon: FetchFunc<undefined, GetPhotosSalonResponse[]> = (client) => client.get('/salon-photos');
+export const GetPhotosSalon: FetchFunc<undefined, GetPhotosSalonResponse[]> = (client) => client.get('/photos');

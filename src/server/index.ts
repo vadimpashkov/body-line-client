@@ -1,2 +1,2 @@
-export { AxiosFetcher } from './AxiosFetcher';
+export * from './AxiosFetcher';
 export * from './fetchers';

@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../reduxStore';
+import { RootState } from '../store';
 
-import { SetToken } from '../reduxStore/accessToken';
+import { SetToken } from '../store/accessToken';
 
 export const useAccessToken = () => {
   const token = useSelector((x: RootState) => x.token);
@@ -9,10 +9,10 @@ export const useAccessToken = () => {
 
   const setToken = (newToken: string) => {
     dispatch(SetToken(newToken));
-  }
+  };
 
   return {
     token,
-    setToken
+    setToken,
   };
-}
+};
