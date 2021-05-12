@@ -31,10 +31,9 @@ export const Navbar: FC<NavbarProps> = ({ open, onClick }: NavbarProps) => {
 
   return (
     <NavbarBlock open={open}>
-      {/* TODO: Удаление записи в течении 24 часов */}
-      {/* TODO: Если человек залогинен - сделать запись на консультацию просто по нажатию на кнопку */}
-      {/* TODO: Разделить record запись и вывод записи на разные страницы */}
-      {/* TODO: Переделать favicon (на досуге) */}
+      {/* TODO: Если человек залогинен - сделать запись на консультацию просто по
+      нажатию на кнопку
+      TODO: Переделать favicon */}
       <NavbarLink as={Link} to="/record" onClick={onClick}>
         <NavbarIcon href={IconSprite + '#recording'} />
         Записаться на массаж

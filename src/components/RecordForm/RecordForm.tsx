@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react';
+import { Redirect, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
@@ -23,18 +24,13 @@ import { Input } from '../Input';
 import { Form } from '../Form';
 
 import {
-  RecordFormInput,
   RecordFormSelect,
   RecordFormOption,
+  RecordFormMessage,
 } from './RecordForm.elements';
 
-type RecordFormTypes = {
-  onSubmit: (data: GetRecordUserResponseType) => void;
-};
-
-export const RecordForm: FC<RecordFormTypes> = ({
-  onSubmit,
-}: RecordFormTypes) => {
+export const RecordForm: FC = () => {
+  const history = useHistory();
   const currentDate = new Date();
   const selectDate = new Date(
     currentDate.getFullYear(),
@@ -47,7 +43,6 @@ export const RecordForm: FC<RecordFormTypes> = ({
   const { massageType: ReduxMassageType } = useCurrentMassageType();
 
   const [selectedDate, setSelectedDate] = useState(selectDate);
-  const [message, setMessage] = useState('');
   const [selectedMasseur, setSelectedMasseur] = useState(ReduxMasseur?.id);
   const [selectedMassageTypeId, setSelectedMassageTypeId] = useState(
     ReduxMassageType?.id
@@ -60,13 +55,15 @@ export const RecordForm: FC<RecordFormTypes> = ({
     mutate: record,
     error: recordError,
     data: recordData,
-    isLoading,
+    isSuccess,
   } = useServerMutation('setRecord', SetRecord);
+
   const { data: masseursData } = useServerQuery(
     'getMasseurs',
     GetMasseurs,
     undefined
   );
+
   const { data: massageTypesData } = useServerQuery(
     'getMassageTypes',
     GetMassageTypes,
@@ -92,12 +89,10 @@ export const RecordForm: FC<RecordFormTypes> = ({
   }, []);
 
   useEffect(() => {
-    if (recordData !== undefined) {
-      onSubmit(recordData);
-    }
-  }, [isLoading]);
+    if (isSuccess) history.push('/user-record');
+  }, [isSuccess]);
 
-  const onSubmitSet = (data: SetRecordRequestType) => {
+  const onSubmit = (data: SetRecordRequestType) => {
     record({
       messeurId: data.messeurId,
       massageTypeId: data.massageTypeId,
@@ -110,8 +105,6 @@ export const RecordForm: FC<RecordFormTypes> = ({
     setSelectedDate(selectDate);
     setValue('massageTypeId', '');
     setSelectedMassageTypeId(0);
-
-    setMessage('Вы успешно записаны на сеанс');
   };
 
   const validateDate = (date: Date) => {
@@ -143,8 +136,8 @@ export const RecordForm: FC<RecordFormTypes> = ({
     <Form
       title={{ primary: 'Запись', secondary: 'на сеанс' }}
       button="Записаться"
-      error={recordError?.message || message}
-      onSubmit={handleSubmit(onSubmitSet)}
+      error={recordError?.message}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <Input message={errors.date?.message}>
         <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
@@ -158,10 +151,10 @@ export const RecordForm: FC<RecordFormTypes> = ({
             disablePast
             format="dd.MM.yyyy HH:mm"
             fullWidth
-            minutesStep={60}
+            minutesStep={30}
             maxDate={new Date(currentDate.setMonth(currentDate.getMonth() + 1))}
             ampm={false}
-            views={['hours']}
+            // views={['hours']}
             InputProps={{
               disableUnderline: true,
             }}

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
 import {
   FormWrapper,
@@ -30,8 +30,18 @@ export const Form: FC<FormProps> = ({
   description,
   onSubmit,
 }: FormProps) => {
+  const [isSubmit, setIsSubmit] = useState(false);
+
   return (
-    <FormWrapper error={error} description={description} onSubmit={onSubmit}>
+    <FormWrapper
+      error={error}
+      description={description}
+      onSubmit={(event) => {
+        event.preventDefault();
+        onSubmit();
+        // setIsSubmit(true);
+      }}
+    >
       <FormTitle invert>
         {title.primary}
         <br />
@@ -39,7 +49,9 @@ export const Form: FC<FormProps> = ({
       </FormTitle>
       <FormInputs>{children}</FormInputs>
       {error && <FormError>{error}</FormError>}
-      <FormButton invert>{button}</FormButton>
+      <FormButton invert disabled={isSubmit}>
+        {button}
+      </FormButton>
       {description && <FormDescription>{description}</FormDescription>}
     </FormWrapper>
   );

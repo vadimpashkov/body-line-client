@@ -11,7 +11,5 @@ export type GetRecordUserResponseType = {
   masseurLastName: string;
 };
 
-export const GetRecordUser: FetchFunc<
-  undefined,
-  GetRecordUserResponseType[]
-> = (client) => client.get('/record');
+export const GetRecordUser: FetchFunc<undefined, GetRecordUserResponseType[]> =
+  (client) => client.get('/record');

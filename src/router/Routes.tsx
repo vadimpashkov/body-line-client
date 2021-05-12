@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import { Home, SignIn, SignUp, Record } from '../pages';
+import { Home, SignIn, SignUp, Record, UserRecord } from '../pages';
 
 import { Secure } from './SecureRoute';
 
@@ -26,6 +26,12 @@ export const Routes: FC = () => (
     <Route path="/record" exact>
       <ApplicationSecure>
         <Record />
+      </ApplicationSecure>
+    </Route>
+
+    <Route path="/user-record" exact>
+      <ApplicationSecure>
+        <UserRecord />
       </ApplicationSecure>
     </Route>
 

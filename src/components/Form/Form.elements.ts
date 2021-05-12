@@ -24,14 +24,6 @@ export const FormWrapper = styled.form<FormWrapperProps>`
   width: min(100%, 600px);
   padding: var(--padding-form);
   background-color: var(--color-background-primary-invert);
-
-  /* @media ${device.sm} {
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-  } */
 `;
 
 export const FormTitle = styled(Title)`
@@ -56,7 +48,6 @@ export const FormInputs = styled.div`
 
 export const FormError = styled.p`
   grid-area: error;
-  /* margin-top: var(--margin-middle); */
   color: var(--color-font-primary-invert);
   text-align: center;
 `;
@@ -64,11 +55,9 @@ export const FormError = styled.p`
 export const FormButton = styled(Button)`
   grid-area: button;
   width: 100%;
-  /* margin-top: var(--margin-middle); */
 `;
 
 export const FormDescription = styled(Text)`
   grid-area: description;
-  /* margin-top: var(--margin-small); */
   text-align: center;
 `;

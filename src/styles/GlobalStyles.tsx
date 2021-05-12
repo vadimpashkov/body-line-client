@@ -169,6 +169,14 @@ export const Container = styled.div`
   max-width: calc(var(--width-container) + var(--padding-container) * 2);
 `;
 
+export const ContainerCenter = styled(Container)`
+  display: grid;
+  place-items: center;
+  padding-top: var(--padding-container);
+  padding-bottom: var(--padding-container);
+  min-height: calc(100vh - var(--height-header) - var(--height-footer));
+`;
+
 export const Main = styled.main`
   display: grid;
   row-gap: ${responsive(54, 90)};
@@ -215,6 +223,7 @@ export const Link = styled.a`
 type ButtonProps = {
   border?: string;
   invert?: boolean;
+  disabled?: boolean;
 };
 
 export const Button = styled.button<ButtonProps>`
@@ -240,6 +249,7 @@ export const Button = styled.button<ButtonProps>`
     background-color var(--transition-standard),
     border var(--transition-standard);
   user-select: none;
+  ${({ disabled }) => disabled && 'opacity: 0.8;'}
 
   @media ${device.xs} {
     min-width: initial;

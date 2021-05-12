@@ -2,20 +2,14 @@ import styled from 'styled-components';
 
 import { Title } from '../../components';
 
-import { Button, Container } from '../../styles/GlobalStyles';
+import { Button, ContainerCenter, Text } from '../../styles/GlobalStyles';
 import { device } from '../../styles/Variables';
 
-export const RecordWrapper = styled.div``;
+export const UserRecordPageWrapper = styled.div``;
 
-export const RecordContainer = styled(Container)`
-  display: grid;
-  place-items: center;
-  padding-top: var(--padding-container);
-  padding-bottom: var(--padding-container);
-  min-height: calc(100vh - var(--height-header) - var(--height-footer));
-`;
+export const UserRecordPageContainer = styled(ContainerCenter)``;
 
-export const RecordCard = styled.div`
+export const UserRecordPageCard = styled.div`
   display: grid;
   row-gap: var(--margin-little);
   background-color: var(--color-background-primary-invert);
@@ -25,13 +19,13 @@ export const RecordCard = styled.div`
   color: var(--color-font-primary-invert);
 `;
 
-export const RecordCardTitle = styled(Title)`
+export const UserRecordPageCardTitle = styled(Title)`
   font-size: var(--size-title-record);
 `;
 
-export const RecordCardDate = styled.p``;
+export const UserRecordPageCardDate = styled.p``;
 
-export const RecordCardContent = styled.div`
+export const UserRecordPageCardContent = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid var(--color-font-primary-invert);
@@ -45,7 +39,7 @@ export const RecordCardContent = styled.div`
   }
 `;
 
-export const RecordCardText = styled.div`
+export const UserRecordPageCardText = styled.div`
   @media ${device.xs} {
     padding-bottom: calc(var(--margin-small) / 2);
 
@@ -57,4 +51,4 @@ export const RecordCardText = styled.div`
   }
 `;
 
-export const RecordCardButton = styled(Button)``;
+export const UserRecordPageCardButton = styled(Button)``;
