@@ -5,11 +5,13 @@ import {
   Container,
   Image,
   PreviewImg,
+  PreviewImgBlock,
+  skeletonPulse,
   Text,
 } from '../../styles/GlobalStyles';
 import { Title } from '../Title';
 
-import { breakpoints, device, font } from '../../styles/Variables';
+import { device, font } from '../../styles/Variables';
 import { DecorationText } from '../DecorationText';
 import { HorizontalScrolling } from '../HorizontalScrolling';
 
@@ -23,31 +25,19 @@ export const MassageTypesTitle = styled(Title)`
   margin-bottom: var(--margin-big);
 `;
 
-export const MassageTypesPreviewImg = styled(PreviewImg)`
-  @media (min-width: ${breakpoints.ml}px) {
-    height: 100%;
-    min-height: 0;
-  }
-`;
+export const MassageTypesPreviewBlock = styled(PreviewImgBlock)``;
 
-type MassageTypesContent = {
-  height?: number;
-};
+export const MassageTypesPreviewImg = styled(PreviewImg)``;
 
-export const MassageTypesContent = styled.div<MassageTypesContent>`
-  @media (min-width: ${breakpoints.ml}px) {
-    ${({ height }) => height && height > 0 && `height: ${height}px;`};
-    min-height: 400px;
-  }
-
+export const MassageTypesContent = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(10px, 1fr));
   gap: var(--margin-standard);
   /* margin-bottom: var(--margin-standard); */
 
   @media ${device.ml} {
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: span 1fr;
   }
 
   @media ${device.sm} {
@@ -120,7 +110,18 @@ export const MassageTypesImagesScroll = styled(HorizontalScrolling)`
 `;
 
 export const MassageTypesBlockImage = styled.div`
+  --size: 320px;
+
   position: relative;
+  animation: ${skeletonPulse} var(--transition-time-skeleton)
+    var(--transition-bezier-easing) infinite alternate;
+  max-width: var(--size);
+  min-width: var(--size);
+
+  @media ${device.xs} and ${device.touch} {
+    max-width: calc(100vw - var(--padding-container) * 2);
+    min-width: calc(100vw - var(--padding-container) * 2);
+  }
 
   &:after {
     content: attr(data-massage-name);
@@ -145,13 +146,5 @@ export const MassageTypesBlockImage = styled.div`
 `;
 
 export const MassageTypesImage = styled(Image)`
-  max-width: 320px;
-  min-width: 320px;
-  width: 320px;
-
-  @media ${device.xxs} {
-    max-width: 280px;
-    min-width: 280px;
-    width: 280px;
-  }
+  display: none;
 `;

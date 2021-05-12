@@ -2,31 +2,29 @@ import styled from 'styled-components';
 
 import { DecorationText } from '../DecorationText';
 
-import { responsive } from '../../styles/mixins';
-import { device, breakpoints } from '../../styles/Variables';
+import { device } from '../../styles/Variables';
 
-import { Container, Image, PreviewImg, Text } from '../../styles/GlobalStyles';
+import {
+  Container,
+  Image,
+  PreviewImg,
+  PreviewImgBlock,
+  skeletonPulse,
+  Text,
+} from '../../styles/GlobalStyles';
 import { Title } from '../Title';
 import { HorizontalScrolling } from '../HorizontalScrolling';
 
 export const AboutUsStyles = styled.section``;
 
-type AboutUsContainerProps = {
-  height?: number;
-};
-
-export const AboutUsContainer = styled(Container)<AboutUsContainerProps>`
-  @media (min-width: ${breakpoints.ml}px) {
-    ${({ height }) => height && height > 0 && `height: ${height}px;`};
-  }
-
+export const AboutUsContainer = styled(Container)`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(10px, 1fr));
   gap: var(--margin-standard);
 
   @media ${device.ml} {
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: span 1fr;
   }
 
   @media ${device.sm} {
@@ -34,15 +32,9 @@ export const AboutUsContainer = styled(Container)<AboutUsContainerProps>`
   }
 `;
 
-export const AboutUsPreviewImg = styled(PreviewImg)`
-  @media (min-width: ${breakpoints.ml}px) {
-    height: 100%;
-    min-height: 0;
-  }
-  /* @media (min-width: ${breakpoints.ml}px) {
-    ${({ height }) => height && height > 0 && `height: ${height}px;`};
-  } */
-`;
+export const AboutUsPreviewBlock = styled(PreviewImgBlock)``;
+
+export const AboutUsPreviewImg = styled(PreviewImg)``;
 
 export const AboutUsContent = styled.div`
   min-width: 0;
@@ -52,9 +44,7 @@ export const AboutUsTitle = styled(Title)`
   margin-bottom: var(--margin-middle);
 `;
 
-export const TextContainer = styled.div`
-  margin-bottom: var(--margin-big);
-`;
+export const TextContainer = styled.div``;
 
 export const AboutUsText = styled(Text)`
   margin-bottom: var(--margin-small);
@@ -64,16 +54,23 @@ export const AboutUsText = styled(Text)`
   }
 `;
 
-export const AboutUsImage = styled(Image)`
-  max-width: 320px;
-  min-width: 320px;
-  width: 320px;
+export const AboutUsImageBlock = styled.div`
+  --size: 320px;
 
-  @media ${device.xxs} {
-    max-width: 280px;
-    min-width: 280px;
-    width: 280px;
+  position: relative;
+  animation: ${skeletonPulse} var(--transition-time-skeleton)
+    var(--transition-bezier-easing) infinite alternate;
+  max-width: var(--size);
+  min-width: var(--size);
+
+  @media ${device.xs} and ${device.touch} {
+    max-width: calc(100vw - var(--padding-container) * 2);
+    min-width: calc(100vw - var(--padding-container) * 2);
   }
+`;
+
+export const AboutUsImage = styled(Image)`
+  display: none;
 `;
 
 export const AboutUsDecorationText = styled(DecorationText)`
@@ -81,7 +78,9 @@ export const AboutUsDecorationText = styled(DecorationText)`
   margin-bottom: var(--margin-small);
 `;
 
-export const Gallery = styled.div``;
+export const Gallery = styled.div`
+  margin-top: var(--margin-big);
+`;
 
 export const ImagesScroll = styled(HorizontalScrolling)`
   height: 200px;

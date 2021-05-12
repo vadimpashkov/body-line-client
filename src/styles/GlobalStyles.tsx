@@ -1,12 +1,13 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, keyframes } from 'styled-components';
 
 import { font, device, breakpoints } from './Variables';
-import { pxToRem, responsive, hexToRgb } from './mixins';
+import { responsive, hexToRgb } from './mixins';
 
-import { ReactComponent as LogoIcon } from '../assets/icons/logo.svg';
+import { ReactComponent as LogoIcon } from '../assets/svg/logo.svg';
 
 export const GlobalStyles = createGlobalStyle`
   :root {
+    --z-scroll-to-top: 300;
     --z-header: 200;
     --z-menu: 100;
     --z-backdrop: 90;
@@ -19,7 +20,7 @@ export const GlobalStyles = createGlobalStyle`
 
     --width-container: ${breakpoints.xl}px;
 
-    --height-header: 60px;
+    --height-header: 70px;
     --height-footer: 80px;
     --height-min-tap-target: 32px;
 
@@ -29,7 +30,7 @@ export const GlobalStyles = createGlobalStyle`
     --margin-little: ${responsive(18, 24)};
     --margin-small: 18px;
 
-    --padding-container: 20px;
+    --padding-container: 30px;
     --padding-form: ${responsive(24, 72)};
 
     --color-primary: ${({ theme }) => theme.color.primary};
@@ -57,10 +58,11 @@ export const GlobalStyles = createGlobalStyle`
     --size-icon-standard: 18px;
     --size-icon-menu: 24px;
     --size-icon-info-panel: var(--size-icon-menu);
-    --size-icon-slider-controller: 34px;
+    --size-icon-slider-controller: var(--height-min-tap-target);
 
     --transition-time-standard: 0.3s;
     --transition-time-fast: 0.2s;
+    --transition-time-skeleton: 2s;
     --transition-bezier-easing: cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bezier-rubber: cubic-bezier(1, 0.17, 0.16, 0.83);
     --transition-standard: var(--transition-time-standard) var(--transition-bezier-rubber);
@@ -70,7 +72,7 @@ export const GlobalStyles = createGlobalStyle`
     --border-radius-standard: 10px;
 
     @media ${device.touch} {
-      --height-header: 80px;
+      /* --height-header: 80px; */
       --height-min-tap-target: 48px;
     }
   }
@@ -145,6 +147,18 @@ export const GlobalStyles = createGlobalStyle`
   .wrapper {
     display: grid;
     grid-template-rows: min-content 1fr min-content;
+  }
+`;
+
+export const skeletonPulse = keyframes`
+  from {
+    background-color: var(--color-font-secondary);
+  }
+  50% {
+    background-color: var(--color-background-primary-invert);
+  }
+  to {
+    background-color: var(--color-font-secondary);
   }
 `;
 
@@ -225,6 +239,7 @@ export const Button = styled.button<ButtonProps>`
   transition: color var(--transition-standard),
     background-color var(--transition-standard),
     border var(--transition-standard);
+  user-select: none;
 
   @media ${device.xs} {
     min-width: initial;
@@ -266,17 +281,28 @@ export const Logotype = styled(LogoIcon)`
   }
 `;
 
-export const PreviewImg = styled(Image)`
+export const PreviewImgBlock = styled.div`
+  position: relative;
   cursor: default;
+  animation: ${skeletonPulse} var(--transition-time-skeleton)
+    var(--transition-bezier-easing) infinite alternate;
 
   @media ${device.ml} {
-    width: 100%;
-    height: ${responsive(260, 470)};
+    display: none;
+    /* width: 100%; */
+    /* height: ${responsive(260, 470)}; */
   }
 
-  @media ${device.sm} {
+  /* @media ${device.sm} {
     display: none;
-  }
+  } */
+`;
+
+export const PreviewImg = styled(Image)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
 `;
 
 export const Input = styled.input`

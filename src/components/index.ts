@@ -2,6 +2,7 @@ export * from './Icon';
 export * from './Title';
 export * from './DecorationText';
 export * from './Links';
+export * from './ScrollToTop';
 
 export * from './Header';
 export * from './Footer';

@@ -14,7 +14,9 @@ export const Consultation: FC = () => {
     <ConsultationWrapper>
       <ConsultationContainer>
         <ConsultationTitle invert>Консультация</ConsultationTitle>
-        <ConsultationText>Наши специалисты молниеносно ответят на любой Ваш вопрос</ConsultationText>
+        <ConsultationText>
+          Наши специалисты молниеносно ответят на любой Ваш вопрос
+        </ConsultationText>
         <ConsultationForm />
       </ConsultationContainer>
     </ConsultationWrapper>

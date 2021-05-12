@@ -21,4 +21,5 @@ export const ConsultationButton = styled(Button)``;
 
 export const ConsultationText = styled(Text)`
   user-select: none;
+  max-width: 500px;
 `;

@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import {
   TeamWrapper,
@@ -12,15 +12,14 @@ import {
   TeamSubtitle,
   TeamText,
   TeamButton,
+  TeamImageBlock,
   TeamImage,
   TeamSliderController,
 } from './Team.elements';
 
 import { useServerQuery } from '../../hooks';
-import { GetMasseurs, GetMasseursResponse } from '../../server';
+import { GetMasseurs } from '../../server';
 import { useCurrentMasseur } from '../../hooks';
-
-import Plug from '../../assets/images/plug.jpg';
 
 export const Team: FC = () => {
   const [index, setIndex] = useState(0);
@@ -46,6 +45,8 @@ export const Team: FC = () => {
     setIndex(quantity);
   };
 
+  if (!data || (data && data.length === 0)) return <></>;
+
   return (
     <TeamWrapper id="team">
       <TeamContainer>
@@ -53,20 +54,17 @@ export const Team: FC = () => {
           <TeamInfo>
             <TeamTitle>Наша команда</TeamTitle>
             <TeamName>
-              {data && `${data[index].firstName} ${data[index].lastName}`}
+              {`${data[index].firstName} ${data[index].lastName}`}
             </TeamName>
             <TeamInfoPanel>
               <TeamSubtitle>Род деятельности:</TeamSubtitle>
-              <TeamText>{data && data[index].occupation}</TeamText>
+              <TeamText>{data[index].occupation}</TeamText>
             </TeamInfoPanel>
             <TeamInfoPanel>
               <TeamSubtitle>О мастере:</TeamSubtitle>
-              <TeamText>{data && data[index].description}</TeamText>
+              <TeamText>{data[index].description}</TeamText>
             </TeamInfoPanel>
           </TeamInfo>
-          {/* <TeamButton onClick={() => handleClickMasseur()}>
-            Записаться
-          </TeamButton> */}
           <TeamButton
             as={Link}
             to="/record"
@@ -74,17 +72,25 @@ export const Team: FC = () => {
           >
             Записаться
           </TeamButton>
-          <TeamSliderController
-            quantityNow={index + 1}
-            quantityTotal={data?.length || 0}
-            onClickLeftArrow={() => clickHandler(-1)}
-            onClickRightArrow={() => clickHandler(1)}
-          />
+          {data.length > 1 && (
+            <TeamSliderController
+              quantityNow={index + 1}
+              quantityTotal={data?.length || 0}
+              onClickLeftArrow={() => clickHandler(-1)}
+              onClickRightArrow={() => clickHandler(1)}
+            />
+          )}
         </TeamContent>
-        <TeamImage
-          src={(data && imgAddress + data[index].src) || Plug}
-          alt=""
-        />
+        <TeamImageBlock>
+          <TeamImage
+            src={imgAddress + data[index].src}
+            alt=""
+            onLoad={(event) => {
+              const target = event.target as HTMLTextAreaElement;
+              target.style.display = 'block';
+            }}
+          />
+        </TeamImageBlock>
       </TeamContainer>
     </TeamWrapper>
   );

@@ -53,12 +53,8 @@ export const RecordForm: FC<RecordFormTypes> = ({
     ReduxMassageType?.id
   );
 
-  const {
-    register,
-    setValue,
-    handleSubmit,
-    errors,
-  } = useForm<SetRecordRequestType>();
+  const { register, setValue, handleSubmit, errors } =
+    useForm<SetRecordRequestType>();
 
   const {
     mutate: record,

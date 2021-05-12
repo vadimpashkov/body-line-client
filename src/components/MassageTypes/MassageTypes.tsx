@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
@@ -6,6 +6,7 @@ import {
   MassageTypesContainer,
   MassageTypesTitle,
   MassageTypesContent,
+  MassageTypesPreviewBlock,
   MassageTypesPreviewImg,
   MassageTypesInfo,
   MassageTypesName,
@@ -21,20 +22,8 @@ import {
 import { useCurrentMassageType, useServerQuery } from '../../hooks';
 import { GetMassageTypes, GetMassageTypesResponse } from '../../server';
 
-import Plug from '../../assets/images/plug.jpg';
-import { breakpoints } from '../../styles/Variables';
-
 export const MassageTypes: FC = () => {
-  const infoRef = useRef<any>();
-  const [height, setHeight] = useState(400);
-  const [preview, setPreview] = useState<GetMassageTypesResponse>({
-    id: 0,
-    name: '',
-    price: 0,
-    description: '',
-    image: '',
-  });
-  const [load, setLoad] = useState(false);
+  const [preview, setPreview] = useState<GetMassageTypesResponse>();
 
   const { data, isLoading } = useServerQuery(
     'massageTypes',
@@ -45,7 +34,7 @@ export const MassageTypes: FC = () => {
   const imgAddress = process.env.REACT_APP_IMG_ADDRESS;
 
   useEffect(() => {
-    if (!isLoading) {
+    if (data !== undefined) {
       setPreview(data![0]);
     }
   }, [isLoading]);
@@ -53,91 +42,61 @@ export const MassageTypes: FC = () => {
   const { SetMassageType } = useCurrentMassageType();
 
   const handleClickMasseur = () => {
-    if (preview.name !== '') {
-      SetMassageType(preview);
-    }
+    if (preview) SetMassageType(preview);
   };
 
-  // useEffect(() => {
-  //   const resize = () => {
-  //     if (window.innerWidth >= breakpoints.sm) setHeight(infoRef.current.clientHeight);
-  //   };
-
-  //   if (null !== infoRef.current) {
-  //     setHeight(infoRef.current.clientHeight);
-
-  //     window.addEventListener('resize', resize);
-  //   }
-
-  //   return () => {
-  //     window.removeEventListener('resize', resize);
-  //   };
-  // }, [preview, defaultPreview, infoRef]);
-
-  useEffect(() => {
-    const resize = () => {
-      if (window.innerWidth >= breakpoints.ml)
-        setHeight(infoRef.current.clientHeight);
-    };
-
-    setHeight(infoRef.current.clientHeight);
-    window.addEventListener('resize', resize);
-
-    return () => {
-      window.removeEventListener('resize', resize);
-    };
-  }, []);
+  if (!data || (data && data.length === 0)) return <></>;
 
   return (
     <MassageTypesWrapper>
       <MassageTypesContainer>
         <MassageTypesTitle>Виды массажа</MassageTypesTitle>
-        <MassageTypesContent height={height}>
-          <MassageTypesPreviewImg
-            src={preview.image === '' ? Plug : imgAddress + preview?.image}
-            alt={preview.name}
-            onLoad={() => setHeight(infoRef.current.clientHeight)}
-          />
+        <MassageTypesContent>
+          <MassageTypesPreviewBlock>
+            <MassageTypesPreviewImg
+              src={preview && imgAddress + preview.image}
+              alt={preview && preview.name}
+              onLoad={(event) => {
+                const target = event.target as HTMLTextAreaElement;
+                target.style.display = 'block';
+              }}
+            />
+          </MassageTypesPreviewBlock>
           <MassageTypesInfo>
-            <MassageTypesInfo ref={infoRef}>
-              <MassageTypesName>{preview.name}</MassageTypesName>
-              <MassageTypesText>{preview.description}</MassageTypesText>
-              {/* <MassageTypesText>{`${preview?.description.substring(0, 420)}...`}</MassageTypesText> */}
-              <MassageTypesButton
-                as={Link}
-                to="/record"
-                onClick={() => handleClickMasseur()}
-              >
-                Записаться
-              </MassageTypesButton>
-            </MassageTypesInfo>
+            <MassageTypesName>{preview && preview.name}</MassageTypesName>
+            <MassageTypesText>
+              {preview && preview.description}
+            </MassageTypesText>
+            <MassageTypesButton
+              as={Link}
+              to="/record"
+              onClick={() => handleClickMasseur()}
+            >
+              Записаться
+            </MassageTypesButton>
           </MassageTypesInfo>
         </MassageTypesContent>
         <MassageTypesGallery>
-          <MassageTypesImagesScroll load={load}>
-            {data === undefined && (
-              <MassageTypesBlockImage data-massage-name="Загрузка...">
-                <MassageTypesImage src={Plug} alt="Загрузка..." />
-              </MassageTypesBlockImage>
-            )}
-            {data?.map((massage) => (
-              <MassageTypesBlockImage
-                data-massage-name={load ? massage.name : 'Загрузка...'}
-                onClick={() => {
-                  setPreview(massage);
-                  setHeight(infoRef.current.clientHeight);
-                  // infoRef.current.scrollIntoView({ block: 'center', behavior: 'smooth' });
-                }}
-                key={massage.id}
-              >
-                <MassageTypesImage
-                  src={load ? imgAddress + massage?.image : Plug}
-                  // src={massage?.image ? imgAddress + massage?.image : Plug}
-                  alt={massage.name}
-                  onLoad={() => setLoad(true)}
-                />
-              </MassageTypesBlockImage>
-            ))}
+          <MassageTypesImagesScroll>
+            {data &&
+              data?.map((massage) => (
+                <MassageTypesBlockImage
+                  data-massage-name={massage.name}
+                  onClick={() => {
+                    setPreview(massage);
+                  }}
+                  key={massage.id}
+                >
+                  <MassageTypesImage
+                    src={imgAddress + massage.image}
+                    alt={massage.name}
+                    onLoad={(event) => {
+                      const target = event.target as HTMLTextAreaElement;
+                      target.style.display = 'block';
+                    }}
+                  />
+                </MassageTypesBlockImage>
+              ))}
           </MassageTypesImagesScroll>
           <MassageTypesDecorationText vertical length="116px">
             Все виды

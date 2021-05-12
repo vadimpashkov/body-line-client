@@ -1,8 +1,14 @@
 import { FC } from 'react';
 
-import { SliderControllerWrapper, ArrowLeft, ArrowRight, Count, CountSmallText } from './SliderController.elements';
+import {
+  SliderControllerWrapper,
+  ArrowLeft,
+  ArrowRight,
+  Count,
+  CountSmallText,
+} from './SliderController.elements';
 
-import IconSprite from '../../assets/slider-controller.svg';
+import IconSprite from '../../assets/svg/slider-controller.svg';
 
 type SliderControllerProps = {
   className?: string;
@@ -28,7 +34,10 @@ export const SliderController: FC<SliderControllerProps> = ({
       <Count>
         {quantityNow} / <CountSmallText>{quantityTotal}</CountSmallText>
       </Count>
-      <ArrowRight href={IconSprite + '#arrow-right'} onClick={onClickRightArrow} />
+      <ArrowRight
+        href={IconSprite + '#arrow-right'}
+        onClick={onClickRightArrow}
+      />
     </SliderControllerWrapper>
   );
 };

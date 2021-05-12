@@ -11,7 +11,7 @@ import {
   SidebarLinks,
 } from './Sidebar.elements';
 
-import Art from '../../assets/images/banner.png';
+import Art from '../../assets/img/banner.png';
 
 type SidebarProps = {
   className?: string;
@@ -24,7 +24,9 @@ export const Sidebar: FC<SidebarProps> = ({ className }: SidebarProps) => {
         <LogotypeLink as={Link} to="/">
           <SidebarLogotype />
         </LogotypeLink>
-        <SidebarQuote invert>Откройте для себя новые ощущения от массажа.</SidebarQuote>
+        <SidebarQuote invert>
+          Откройте для себя новые ощущения от массажа.
+        </SidebarQuote>
       </SidebarContainer>
       <SidebarArt src={Art} alt="Body-Line - Арт" />
       <SidebarContainer none>

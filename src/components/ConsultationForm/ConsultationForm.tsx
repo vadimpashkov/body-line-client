@@ -16,6 +16,7 @@ import {
 import { useForm } from 'react-hook-form';
 
 export const ConsultationForm: FC = () => {
+  const [message, setMessage] = useState('');
   const [phone, setPhone] = useState('');
   const {
     register,
@@ -60,6 +61,9 @@ export const ConsultationForm: FC = () => {
 
     setValue('phone', '');
     setPhone('');
+    setMessage(
+      'Вы успешно записаны на консультацию, ожидайте звонка администратора'
+    );
   };
 
   const validatePhone = (phone: string) => {
@@ -88,6 +92,7 @@ export const ConsultationForm: FC = () => {
         </ConsultationFormContainer>
         <ConsultationText primary>
           {errors.phone?.message ||
+            message ||
             'Администратор перезвонит в течении 2 часов*'}
         </ConsultationText>
       </>

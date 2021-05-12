@@ -28,6 +28,7 @@ type SidebarContainerProps = {
 };
 
 export const SidebarContainer = styled.div<SidebarContainerProps>`
+  display: grid;
   padding: var(--margin-middle) var(--margin-standard);
 
   @media ${device.md} {
@@ -81,6 +82,12 @@ export const SidebarArt = styled.img`
   @media ${device.md} {
     display: none;
   }
+
+  @media (max-height: 900px) {
+    display: none;
+  }
 `;
 
-export const SidebarLinks = styled(Links)``;
+export const SidebarLinks = styled(Links)`
+  align-self: end;
+`;

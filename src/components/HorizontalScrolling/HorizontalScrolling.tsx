@@ -125,7 +125,7 @@ export const HorizontalScrolling: FC<HorizontalScrollingProps> = ({
         scroll.removeEventListener('mouseleave', mouseLeave);
       };
     }
-  }, [load]);
+  }, []);
 
   return (
     <HorizontalScrollingBlock ref={scrollRef} className={className}>

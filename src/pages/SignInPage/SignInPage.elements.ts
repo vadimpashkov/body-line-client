@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 import { Container, Link } from '../../styles/GlobalStyles';
 
-import { pxToRem } from '../../styles/mixins';
 import { device, font } from '../../styles/Variables';
 
 export const SignInWrapper = styled.section`

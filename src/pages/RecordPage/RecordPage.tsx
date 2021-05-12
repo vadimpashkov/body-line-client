@@ -43,10 +43,13 @@ export const Record: FC = () => {
   );
 
   useEffect(() => {
-    if (!isLoading) {
+    if (data !== undefined) {
       setInfo(data![0]);
     }
   }, [isLoading]);
+
+  // FIXME: При записи на сеанс, в меню поменять кнопку
+  // FIXME: Моргает страница
 
   const handleAdditionFormSubmit = (data: GetRecordUserResponseType) => {
     console.log(data);

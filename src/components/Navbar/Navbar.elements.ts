@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 import { Icon } from '../Icon';
-import { IconSvg } from '../Icon/Icon.elements';
 
 import { device, font } from '../../styles/Variables';
 
@@ -20,8 +19,10 @@ export const NavbarBlock = styled.nav<{ open: boolean }>`
   color: var(--color-font-primary);
   background-color: var(--color-background-primary);
   border-radius: var(--border-radius-standard);
-  box-shadow: 0 0 8px 1px rgb(var(--color-font-primary-rgb) / var(--opacity-shadow));
-  transition: transform var(--transition-standard), opacity var(--transition-fast);
+  box-shadow: 0 0 8px 1px
+    rgb(var(--color-font-primary-rgb) / var(--opacity-shadow));
+  transition: transform var(--transition-standard),
+    opacity var(--transition-fast);
 
   ${({ open }) =>
     open
@@ -50,7 +51,9 @@ export const NavbarLink = styled.a`
 
   @media ${device.cursor} {
     &:hover {
-      background-color: rgb(var(--color-font-primary-rgb) / var(--opacity-focus));
+      background-color: rgb(
+        var(--color-font-primary-rgb) / var(--opacity-focus)
+      );
     }
   }
 `;

@@ -6,6 +6,7 @@ import { AppTheme } from './appSetup/AppTheme';
 import { Routes } from './router/Routes';
 import { ReduxState } from './appSetup/ReduxSetup';
 import { QueryContext } from './appSetup/QueryContext';
+import { ScrollToTop } from './components';
 
 export const App: FC = () => {
   return (
@@ -13,6 +14,7 @@ export const App: FC = () => {
       <ReduxState>
         <AppTheme>
           <>
+            <ScrollToTop />
             <BrowserRouter>
               <Routes />
             </BrowserRouter>

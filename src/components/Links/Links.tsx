@@ -8,7 +8,7 @@ type LinksProps = {
 
 export const Links: FC<LinksProps> = ({ className }: LinksProps) => (
   <LinksStyles className={className}>
-    <LinkItem href="https://vk.com">VK</LinkItem>
-    <LinkItem href="https://instagram.com">Instagram</LinkItem>
+    <LinkItem href="https://vk.com/vadimpashkov">VK</LinkItem>
+    <LinkItem href="https://github.com/vadimpashkov">GitHub</LinkItem>
   </LinksStyles>
 );

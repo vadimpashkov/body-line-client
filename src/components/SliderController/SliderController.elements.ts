@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { pxToRem } from '../../styles/mixins';
-
 import { Icon } from '../Icon';
 
 export const SliderControllerWrapper = styled.div`

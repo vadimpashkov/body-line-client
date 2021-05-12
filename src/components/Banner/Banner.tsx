@@ -15,7 +15,7 @@ import {
   Image,
 } from './Banner.elements';
 
-import BannerImage from '../../assets/images/banner.png';
+import BannerImage from '../../assets/img/banner.png';
 
 export const Banner: FC = () => {
   return (

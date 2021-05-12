@@ -1,11 +1,12 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { scroller, animateScroll } from 'react-scroll';
 
 import { NavbarBlock, NavbarLink, NavbarIcon } from './Navbar.elements';
 
 import { useAccessToken } from '../../hooks';
 
-import IconSprite from '../../assets/menu.svg';
+import IconSprite from '../../assets/svg/menu.svg';
 
 type NavbarProps = {
   open: boolean;
@@ -16,48 +17,61 @@ export const Navbar: FC<NavbarProps> = ({ open, onClick }: NavbarProps) => {
   // const [login, setLogin] = useState(false);
   const { setToken, token } = useAccessToken();
 
+  const getItem = (id: string, offset: number = 140) => {
+    const item = scroller.get(id);
+    !item
+      ? setTimeout(getItem, 100, id)
+      : scroller.scrollTo(id, {
+          duration: 1500,
+          delay: 100,
+          smooth: true,
+          offset: -offset,
+        });
+  };
+
   return (
     <NavbarBlock open={open}>
-      {/* TODO: Сделать якоря */}
-      <NavbarLink as={Link} to="/" onClick={onClick}>
-        <NavbarIcon href={IconSprite + '#masters'} />
-        Мастера
-      </NavbarLink>
+      {/* TODO: Удаление записи в течении 24 часов */}
+      {/* TODO: Если человек залогинен - сделать запись на консультацию просто по нажатию на кнопку */}
+      {/* TODO: Разделить record запись и вывод записи на разные страницы */}
+      {/* TODO: Переделать favicon (на досуге) */}
       <NavbarLink as={Link} to="/record" onClick={onClick}>
         <NavbarIcon href={IconSprite + '#recording'} />
         Записаться на массаж
       </NavbarLink>
-      <NavbarLink as={Link} to="/" onClick={onClick}>
+      <NavbarLink
+        as={Link}
+        to="/"
+        onClick={() => {
+          onClick();
+          getItem('team');
+        }}
+      >
+        <NavbarIcon href={IconSprite + '#masters'} />
+        Мастера
+      </NavbarLink>
+      <NavbarLink
+        as={Link}
+        to="/"
+        onClick={() => {
+          onClick();
+          getItem('contacts', 70);
+        }}
+      >
         <NavbarIcon href={IconSprite + '#phone'} />
         Контакты
       </NavbarLink>
-      {!token && (
+      {!token ? (
         <NavbarLink as={Link} to="/signin" onClick={onClick}>
           <NavbarIcon href={IconSprite + '#user'} />
           Войти
         </NavbarLink>
-      )}
-      {token && (
+      ) : (
         <NavbarLink onClick={() => setToken('')}>
           <NavbarIcon href={IconSprite + '#sign-out'} />
           Выйти
         </NavbarLink>
       )}
-      {/* {!token && (
-        <>
-          <NavbarButton as={Link} to="/signin" border onClick={onClick}>
-            Войти
-          </NavbarButton>
-          <NavbarButton as={Link} to="/signup" border onClick={onClick}>
-            Зарегистрироваться
-          </NavbarButton>
-        </>
-      )}
-      {token && (
-        <NavbarButton border onClick={() => setToken('')}>
-          Выйти
-        </NavbarButton>
-      )} */}
     </NavbarBlock>
   );
 };

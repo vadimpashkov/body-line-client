@@ -1,12 +1,20 @@
 import styled from 'styled-components';
 
-import { Button, Container, Image, Text } from '../../styles/GlobalStyles';
+import {
+  Button,
+  Container,
+  Image,
+  PreviewImg,
+  PreviewImgBlock,
+  skeletonPulse,
+  Text,
+} from '../../styles/GlobalStyles';
 
 import { Title } from '../Title';
 import { SliderController } from '../SliderController';
 
 import { responsive } from '../../styles/mixins';
-import { device, font } from '../../styles/Variables';
+import { device } from '../../styles/Variables';
 
 export const TeamWrapper = styled.section``;
 
@@ -20,6 +28,7 @@ export const TeamContainer = styled(Container)`
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
     gap: var(--margin-middle);
+    min-height: 800px;
     /* min-height: initial; */
     /* min-height: 400px; */
   }
@@ -36,10 +45,10 @@ export const TeamContent = styled.div`
     column-gap: var(--margin-middle);
   }
 
-  @media ${device.xs} {
+  /* @media ${device.xs} {
     grid-template: initial;
     grid-template-columns: 1fr;
-  }
+  } */
 `;
 
 export const TeamInfo = styled.div`
@@ -97,10 +106,24 @@ export const TeamSliderController = styled(SliderController)`
   }
 `;
 
-export const TeamImage = styled(Image)`
+export const TeamImageBlock = styled(PreviewImgBlock)`
   user-select: none;
 
-  @media ${device.sm} {
-    height: ${responsive(200, 400)};
+  @media ${device.ml} {
+    display: block;
   }
+
+  @media ${device.sm} {
+    height: 200px;
+  }
+
+  @media ${device.xxs} {
+    height: 160px;
+  }
+`;
+
+export const TeamImage = styled(PreviewImg)`
+  /* @media ${device.sm} {
+    height: ${responsive(200, 400)};
+  } */
 `;
