@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Container, Text } from '../../styles/GlobalStyles';
 
 export const FooterBlock = styled.footer`
-  background-color: #282828;
+  background-color: var(--color-footer);
 `;
 
 export const FooterContainer = styled(Container)`

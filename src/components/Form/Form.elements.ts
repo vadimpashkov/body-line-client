@@ -28,8 +28,8 @@ export const FormWrapper = styled.form<FormWrapperProps>`
 
 export const FormTitle = styled(Title)`
   grid-area: title;
-  font-size: var(--size-title-middle);
-  line-height: ${responsive(34, 64)};
+  font-size: var(--size-title-form);
+  line-height: 1.2;
   text-transform: uppercase;
   user-select: none;
 `;

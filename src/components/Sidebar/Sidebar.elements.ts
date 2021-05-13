@@ -15,11 +15,9 @@ export const SidebarWrapper = styled.div`
   background-color: var(--color-background-primary-invert);
 
   @media ${device.md} {
-    position: initial;
-    top: initial;
     height: initial;
     grid-template-rows: 1fr;
-    background-color: transparent;
+    background-color: var(--color-footer);
   }
 `;
 
@@ -65,11 +63,7 @@ export const LogotypeLink = styled.a`
   }
 `;
 
-export const SidebarLogotype = styled(Logotype)`
-  @media ${device.md} {
-    fill: var(--color-font-primary);
-  }
-`;
+export const SidebarLogotype = styled(Logotype)``;
 
 export const SidebarArt = styled.img`
   align-self: center;

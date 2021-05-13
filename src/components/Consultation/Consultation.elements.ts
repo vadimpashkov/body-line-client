@@ -6,6 +6,7 @@ import { Title } from '../Title';
 
 export const ConsultationWrapper = styled.section`
   background-color: var(--color-background-primary-invert);
+  margin-top: var(--padding-block);
 `;
 
 export const ConsultationContainer = styled(Container)`

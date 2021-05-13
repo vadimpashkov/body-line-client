@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { scroller, animateScroll } from 'react-scroll';
+import { HashLink } from 'react-router-hash-link';
 
 import { NavbarBlock, NavbarLink, NavbarIcon } from './Navbar.elements';
 
@@ -14,19 +14,16 @@ type NavbarProps = {
 };
 
 export const Navbar: FC<NavbarProps> = ({ open, onClick }: NavbarProps) => {
-  // const [login, setLogin] = useState(false);
   const { setToken, token } = useAccessToken();
 
-  const getItem = (id: string, offset: number = 140) => {
-    const item = scroller.get(id);
-    !item
-      ? setTimeout(getItem, 100, id)
-      : scroller.scrollTo(id, {
-          duration: 1500,
-          delay: 100,
-          smooth: true,
-          offset: -offset,
-        });
+  const scrollWithOffset = (element: HTMLElement, offset: number = 70) => {
+    const yCoord = element.getBoundingClientRect().top + window.pageYOffset;
+    const yOffset = -offset;
+
+    console.log(element, element.getBoundingClientRect().top);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: yCoord + yOffset, behavior: 'smooth' });
   };
 
   return (
@@ -39,23 +36,19 @@ export const Navbar: FC<NavbarProps> = ({ open, onClick }: NavbarProps) => {
         Записаться на массаж
       </NavbarLink>
       <NavbarLink
-        as={Link}
-        to="/"
-        onClick={() => {
-          onClick();
-          getItem('team');
-        }}
+        as={HashLink}
+        to="/#team"
+        scroll={(element: HTMLElement) => scrollWithOffset(element)}
+        onClick={onClick}
       >
         <NavbarIcon href={IconSprite + '#masters'} />
         Мастера
       </NavbarLink>
       <NavbarLink
-        as={Link}
-        to="/"
-        onClick={() => {
-          onClick();
-          getItem('contacts', 70);
-        }}
+        as={HashLink}
+        to="/#contacts"
+        scroll={(element: HTMLElement) => scrollWithOffset(element, 70)}
+        onClick={onClick}
       >
         <NavbarIcon href={IconSprite + '#phone'} />
         Контакты

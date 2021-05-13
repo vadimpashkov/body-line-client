@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
@@ -8,7 +8,6 @@ import ruLocale from 'date-fns/locale/ru';
 import {
   GetMassageTypes,
   GetMasseurs,
-  GetRecordUserResponseType,
   SetRecord,
   SetRecordRequestType,
 } from '../../server';
@@ -21,12 +20,11 @@ import {
 } from '../../hooks';
 
 import { Input } from '../Input';
-import { Form } from '../Form';
 
 import {
+  RecordFormWrapper,
   RecordFormSelect,
   RecordFormOption,
-  RecordFormMessage,
 } from './RecordForm.elements';
 
 export const RecordForm: FC = () => {
@@ -54,7 +52,6 @@ export const RecordForm: FC = () => {
   const {
     mutate: record,
     error: recordError,
-    data: recordData,
     isSuccess,
   } = useServerMutation('setRecord', SetRecord);
 
@@ -133,7 +130,7 @@ export const RecordForm: FC = () => {
   };
 
   return (
-    <Form
+    <RecordFormWrapper
       title={{ primary: 'Запись', secondary: 'на сеанс' }}
       button="Записаться"
       error={recordError?.message}
@@ -154,7 +151,6 @@ export const RecordForm: FC = () => {
             minutesStep={30}
             maxDate={new Date(currentDate.setMonth(currentDate.getMonth() + 1))}
             ampm={false}
-            // views={['hours']}
             InputProps={{
               disableUnderline: true,
             }}
@@ -195,6 +191,6 @@ export const RecordForm: FC = () => {
           ))}
         </RecordFormSelect>
       </Input>
-    </Form>
+    </RecordFormWrapper>
   );
 };

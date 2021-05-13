@@ -2,7 +2,11 @@ import styled from 'styled-components';
 
 import { Title } from '../../components';
 
-import { Button, ContainerCenter, Text } from '../../styles/GlobalStyles';
+import {
+  Button,
+  ContainerCenter,
+  KeyframesManifestation,
+} from '../../styles/GlobalStyles';
 import { device } from '../../styles/Variables';
 
 export const UserRecordPageWrapper = styled.div``;
@@ -17,6 +21,8 @@ export const UserRecordPageCard = styled.div`
   width: min(100%, 600px);
   padding: var(--padding-form);
   color: var(--color-font-primary-invert);
+  animation: ${KeyframesManifestation} var(--transition-time-manifestation)
+    var(--transition-bezier-easing);
 `;
 
 export const UserRecordPageCardTitle = styled(Title)`

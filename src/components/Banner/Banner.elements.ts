@@ -41,8 +41,8 @@ export const BannerTitle = styled(Title)`
   user-select: initial;
 
   @media ${device.sm} {
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: initial;
+    margin-right: initial;
   }
 `;
 
@@ -53,6 +53,7 @@ export const BannerButton = styled(Button)`
     margin-left: 0;
     margin: 0 auto;
     width: 80%;
+    margin-bottom: var(--margin-standard);
   }
 
   @media ${device.xs} {
@@ -129,7 +130,9 @@ export const BannerLinks = styled(Links)`
   bottom: var(--padding-container);
 
   @media ${device.sm} {
-    left: 50%;
-    transform: translateX(-50%);
+    position: initial;
+    left: initial;
+    bottom: initial;
+    margin: 0 auto;
   }
 `;

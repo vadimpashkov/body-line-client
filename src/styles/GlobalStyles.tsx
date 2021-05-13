@@ -32,6 +32,7 @@ export const GlobalStyles = createGlobalStyle`
 
     --padding-container: 30px;
     --padding-form: ${responsive(24, 72)};
+    --padding-block: ${responsive(54, 90)};
 
     --color-primary: ${({ theme }) => theme.color.primary};
     --color-primary-rgb: ${({ theme }) => hexToRgb(theme.color.primary)};
@@ -48,21 +49,25 @@ export const GlobalStyles = createGlobalStyle`
       theme.color.background.invert};
     --color-background-primary-invert-rgb: ${({ theme }) =>
       hexToRgb(theme.color.background.invert)};
+    --color-footer: #282828;
 
     --size-title-standard: ${responsive(32, 64)};
     --size-title-middle: ${responsive(24, 54)};
     --size-title-little: ${responsive(18, 36)};
-    --size-title-banner: ${responsive(48, 90)};
+    --size-title-banner: ${responsive(42, 90)};
     --size-title-record: ${responsive(24, 36)};
+    --size-title-form: ${responsive(32, 54)};
 
     --size-icon-standard: 18px;
     --size-icon-menu: 24px;
     --size-icon-info-panel: var(--size-icon-menu);
-    --size-icon-slider-controller: var(--height-min-tap-target);
+    --size-icon-slider-controller: 32px;
 
     --transition-time-standard: 0.3s;
     --transition-time-fast: 0.2s;
     --transition-time-skeleton: 2s;
+    --transition-time-manifestation: 0.8s;
+    --transition-time-text-loading: 3s;
     --transition-bezier-easing: cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bezier-rubber: cubic-bezier(1, 0.17, 0.16, 0.83);
     --transition-standard: var(--transition-time-standard) var(--transition-bezier-rubber);
@@ -150,7 +155,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 `;
 
-export const skeletonPulse = keyframes`
+export const KeyframesSkeletonPulse = keyframes`
   from {
     background-color: var(--color-font-secondary);
   }
@@ -159,6 +164,63 @@ export const skeletonPulse = keyframes`
   }
   to {
     background-color: var(--color-font-secondary);
+  }
+`;
+
+export const KeyframesTextSkeletonManifestation = keyframes`
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+export const KeyframesTextLoading = keyframes`
+  from {
+    content: '';
+  }
+  9% {
+    content: 'З';
+  }
+  18% {
+    content: 'За';
+  }
+  27% {
+    content: 'Заг';
+  }
+  36% {
+    content: 'Загр';
+  }
+  45% {
+    content: 'Загру';
+  }
+  54% {
+    content: 'Загруз';
+  }
+  63% {
+    content: 'Загрузк';
+  }
+  72% {
+    content: 'Загрузка';
+  }
+  81% {
+    content: 'Загрузка.';
+  }
+  90% {
+    content: 'Загрузка..';
+  }
+  to {
+    content: 'Загрузка...';
+  }
+`;
+
+export const KeyframesManifestation = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 `;
 
@@ -179,7 +241,7 @@ export const ContainerCenter = styled(Container)`
 
 export const Main = styled.main`
   display: grid;
-  row-gap: ${responsive(54, 90)};
+  /* row-gap: ${responsive(54, 90)}; */
   min-height: calc(100vh - var(--height-header) - var(--height-footer));
 `;
 
@@ -249,7 +311,7 @@ export const Button = styled.button<ButtonProps>`
     background-color var(--transition-standard),
     border var(--transition-standard);
   user-select: none;
-  ${({ disabled }) => disabled && 'opacity: 0.8;'}
+  ${({ disabled }) => disabled && 'pointer-events: none;'}
 
   @media ${device.xs} {
     min-width: initial;
@@ -294,7 +356,7 @@ export const Logotype = styled(LogoIcon)`
 export const PreviewImgBlock = styled.div`
   position: relative;
   cursor: default;
-  animation: ${skeletonPulse} var(--transition-time-skeleton)
+  animation: ${KeyframesSkeletonPulse} var(--transition-time-skeleton)
     var(--transition-bezier-easing) infinite alternate;
 
   @media ${device.ml} {

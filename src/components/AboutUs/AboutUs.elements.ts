@@ -9,13 +9,15 @@ import {
   Image,
   PreviewImg,
   PreviewImgBlock,
-  skeletonPulse,
+  KeyframesSkeletonPulse,
   Text,
 } from '../../styles/GlobalStyles';
 import { Title } from '../Title';
 import { HorizontalScrolling } from '../HorizontalScrolling';
 
-export const AboutUsStyles = styled.section``;
+export const AboutUsStyles = styled.section`
+  margin-top: var(--padding-block);
+`;
 
 export const AboutUsContainer = styled(Container)`
   display: grid;
@@ -58,7 +60,7 @@ export const AboutUsImageBlock = styled.div`
   --size: 320px;
 
   position: relative;
-  animation: ${skeletonPulse} var(--transition-time-skeleton)
+  animation: ${KeyframesSkeletonPulse} var(--transition-time-skeleton)
     var(--transition-bezier-easing) infinite alternate;
   max-width: var(--size);
   min-width: var(--size);

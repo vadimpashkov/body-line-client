@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Redirect, Link, useLocation, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { MainLayout } from '../Layout';
 
@@ -68,43 +68,39 @@ export const UserRecord: FC = () => {
     <MainLayout>
       <UserRecordPageWrapper>
         <UserRecordPageContainer>
-          {userRecordIsLoading ? (
-            <UserRecordPageCardTitle>Загрузка...</UserRecordPageCardTitle>
-          ) : (
-            info && (
-              <UserRecordPageCard>
-                <UserRecordPageCardTitle invert>
-                  Вы записаны на сеанс
-                </UserRecordPageCardTitle>
-                <UserRecordPageCardDate>
-                  {formatter.format(new Date(info?.date))}
-                </UserRecordPageCardDate>
-                <UserRecordPageCardContent>
-                  <UserRecordPageCardText>Массажист</UserRecordPageCardText>
-                  <UserRecordPageCardText>{`${info?.masseurFirstName} ${info.masseurLastName}`}</UserRecordPageCardText>
-                </UserRecordPageCardContent>
-                <UserRecordPageCardContent>
-                  <UserRecordPageCardText>Вид массажа</UserRecordPageCardText>
-                  <UserRecordPageCardText>
-                    {info.massageTypeName}
-                  </UserRecordPageCardText>
-                </UserRecordPageCardContent>
-                {!isDay && (
-                  <UserRecordPageCardButton
-                    invert
-                    onClick={() => {
-                      userRecordDelMutate({
-                        id: info.id,
-                      });
-                      setDisabled(true);
-                    }}
-                    disabled={disabled}
-                  >
-                    Отменить сеанс
-                  </UserRecordPageCardButton>
-                )}
-              </UserRecordPageCard>
-            )
+          {info && (
+            <UserRecordPageCard>
+              <UserRecordPageCardTitle invert>
+                Вы записаны на сеанс
+              </UserRecordPageCardTitle>
+              <UserRecordPageCardDate>
+                {formatter.format(new Date(info?.date))}
+              </UserRecordPageCardDate>
+              <UserRecordPageCardContent>
+                <UserRecordPageCardText>Массажист</UserRecordPageCardText>
+                <UserRecordPageCardText>{`${info?.masseurFirstName} ${info.masseurLastName}`}</UserRecordPageCardText>
+              </UserRecordPageCardContent>
+              <UserRecordPageCardContent>
+                <UserRecordPageCardText>Вид массажа</UserRecordPageCardText>
+                <UserRecordPageCardText>
+                  {info.massageTypeName}
+                </UserRecordPageCardText>
+              </UserRecordPageCardContent>
+              {!isDay && (
+                <UserRecordPageCardButton
+                  invert
+                  onClick={() => {
+                    userRecordDelMutate({
+                      id: info.id,
+                    });
+                    setDisabled(true);
+                  }}
+                  disabled={disabled}
+                >
+                  Отменить сеанс
+                </UserRecordPageCardButton>
+              )}
+            </UserRecordPageCard>
           )}
         </UserRecordPageContainer>
       </UserRecordPageWrapper>

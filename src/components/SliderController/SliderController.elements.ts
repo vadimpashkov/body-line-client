@@ -32,6 +32,6 @@ export const Count = styled.div`
 `;
 
 export const CountSmallText = styled.span`
-  font-size: 1rem;
+  font-size: 60%;
   color: var(--color-primary);
 `;

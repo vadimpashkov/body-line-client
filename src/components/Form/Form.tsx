@@ -11,6 +11,7 @@ import {
 } from './Form.elements';
 
 type FormProps = {
+  className?: string;
   title: {
     primary: string;
     secondary: string;
@@ -23,6 +24,7 @@ type FormProps = {
 };
 
 export const Form: FC<FormProps> = ({
+  className,
   title,
   children,
   error,
@@ -39,8 +41,9 @@ export const Form: FC<FormProps> = ({
       onSubmit={(event) => {
         event.preventDefault();
         onSubmit();
-        // setIsSubmit(true);
+        setIsSubmit(true);
       }}
+      className={className}
     >
       <FormTitle invert>
         {title.primary}

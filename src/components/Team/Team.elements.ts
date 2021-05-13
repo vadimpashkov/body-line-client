@@ -3,10 +3,8 @@ import styled from 'styled-components';
 import {
   Button,
   Container,
-  Image,
   PreviewImg,
   PreviewImgBlock,
-  skeletonPulse,
   Text,
 } from '../../styles/GlobalStyles';
 
@@ -23,12 +21,13 @@ export const TeamContainer = styled(Container)`
   grid-template-columns: 1fr 1fr;
   gap: var(--margin-standard);
   min-height: 720px;
+  margin-top: var(--padding-block);
 
   @media ${device.sm} {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
     gap: var(--margin-middle);
-    min-height: 800px;
+    min-height: 860px;
     /* min-height: initial; */
     /* min-height: 400px; */
   }

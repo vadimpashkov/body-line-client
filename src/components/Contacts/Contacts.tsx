@@ -14,8 +14,8 @@ import IconSpriteMenu from '../../assets/svg/menu.svg';
 
 export const Contacts: FC = () => {
   return (
-    <ContactsWrapper id="contacts">
-      <ContactsContainer>
+    <ContactsWrapper>
+      <ContactsContainer id="contacts">
         <ContactsTitle invert>Контакты</ContactsTitle>
         <ContactsInfoPanels>
           <InfoPanel

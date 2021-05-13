@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from 'react';
-import { animateScroll } from 'react-scroll';
 
 import { ScrollToTopWrapper, ScrollToTopIcon } from './ScrollToTop.elements';
 
@@ -28,7 +27,7 @@ export const ScrollToTop: FC = () => {
   return (
     <ScrollToTopWrapper
       onClick={() => {
-        animateScroll.scrollToTop();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }}
       visible={visible}
     >

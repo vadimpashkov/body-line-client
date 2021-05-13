@@ -9,6 +9,7 @@ import { device } from '../../styles/Variables';
 
 export const ContactsWrapper = styled.section`
   background-color: var(--color-background-primary-invert);
+  margin-top: var(--padding-block);
 `;
 
 export const ContactsContainer = styled(Container)`

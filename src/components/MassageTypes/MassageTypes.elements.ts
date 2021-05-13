@@ -6,7 +6,7 @@ import {
   Image,
   PreviewImg,
   PreviewImgBlock,
-  skeletonPulse,
+  KeyframesSkeletonPulse,
   Text,
 } from '../../styles/GlobalStyles';
 import { Title } from '../Title';
@@ -15,7 +15,9 @@ import { device, font } from '../../styles/Variables';
 import { DecorationText } from '../DecorationText';
 import { HorizontalScrolling } from '../HorizontalScrolling';
 
-export const MassageTypesWrapper = styled.section``;
+export const MassageTypesWrapper = styled.section`
+  margin-top: var(--padding-block);
+`;
 
 export const MassageTypesContainer = styled(Container)`
   display: grid;
@@ -113,7 +115,7 @@ export const MassageTypesBlockImage = styled.div`
   --size: 320px;
 
   position: relative;
-  animation: ${skeletonPulse} var(--transition-time-skeleton)
+  animation: ${KeyframesSkeletonPulse} var(--transition-time-skeleton)
     var(--transition-bezier-easing) infinite alternate;
   max-width: var(--size);
   min-width: var(--size);
