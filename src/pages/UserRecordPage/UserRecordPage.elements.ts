@@ -9,9 +9,18 @@ import {
 } from '../../styles/GlobalStyles';
 import { device } from '../../styles/Variables';
 
-export const UserRecordPageWrapper = styled.div``;
+export const UserRecordPageWrapper = styled.div`
+  @media ${device.md} {
+    background-color: var(--color-background-primary-invert);
+  }
+`;
 
-export const UserRecordPageContainer = styled(ContainerCenter)``;
+export const UserRecordPageContainer = styled(ContainerCenter)`
+  @media ${device.md} {
+    padding: 0;
+    text-align: center;
+  }
+`;
 
 export const UserRecordPageCard = styled.div`
   display: grid;
@@ -23,6 +32,10 @@ export const UserRecordPageCard = styled.div`
   color: var(--color-font-primary-invert);
   animation: ${KeyframesManifestation} var(--transition-time-manifestation)
     var(--transition-bezier-easing);
+
+  @media ${device.md} {
+    padding: var(--margin-middle) var(--padding-container);
+  }
 `;
 
 export const UserRecordPageCardTitle = styled(Title)`
@@ -39,9 +52,7 @@ export const UserRecordPageCardContent = styled.div`
   @media ${device.xs} {
     flex-flow: column;
     border: none;
-    /* border: 1px solid var(--color-font-primary-invert); */
-    padding: var(--margin-small);
-    /* row-gap: var(--margin-small); */
+    padding: var(--margin-small) 0;
   }
 `;
 
