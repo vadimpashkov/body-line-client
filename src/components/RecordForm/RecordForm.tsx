@@ -53,6 +53,7 @@ export const RecordForm: FC = () => {
     mutate: record,
     error: recordError,
     isSuccess,
+    isLoading,
   } = useServerMutation('setRecord', SetRecord);
 
   const { data: masseursData } = useServerQuery(
@@ -135,6 +136,7 @@ export const RecordForm: FC = () => {
       button="Записаться"
       error={recordError?.message}
       onSubmit={handleSubmit(onSubmit)}
+      disabled={isLoading}
     >
       <Input message={errors.date?.message}>
         <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>

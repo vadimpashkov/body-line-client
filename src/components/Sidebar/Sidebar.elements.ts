@@ -40,7 +40,7 @@ export const SidebarQuote = styled(Title)`
   font-family: ${font.family.text.name};
   font-weight: 500;
   line-height: ${font.lineHeight};
-  font-size: var(--size-title-little);
+  font-size: var(--size-title-sidebar);
   text-transform: none;
   user-select: none;
 

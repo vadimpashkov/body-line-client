@@ -12,23 +12,18 @@ export const SignUpWrapper = styled.section`
   @media ${device.md} {
     grid-template-rows: 1fr auto;
     align-items: center;
-  }
-
-  @media ${device.sm} {
     background-color: var(--color-background-primary-invert);
   }
 `;
 
 export const SignUpContainer = styled(Container)`
   margin: 0;
-  margin-bottom: var(--margin-middle);
   display: grid;
   align-items: center;
   justify-items: center;
 
   @media ${device.md} {
-    margin-bottom: 0;
-    padding: var(--margin-middle) 0;
+    padding: 0;
     text-align: center;
   }
 `;
@@ -36,16 +31,24 @@ export const SignUpContainer = styled(Container)`
 export const SignUpText = styled.p`
   background-color: var(--color-background-primary);
   color: var(--color-font-primary);
-  padding: var(--margin-middle) var(--padding-container);
+  padding: 0 var(--padding-container);
+  height: var(--height-header);
+  line-height: var(--height-header);
   text-align: right;
+
+  @media ${device.ml} {
+    text-align: center;
+  }
 
   @media ${device.md} {
     position: sticky;
     bottom: 0;
     grid-row-start: 2;
-    text-align: center;
     color: var(--color-font-primary-invert);
     background-color: var(--color-footer);
+    padding: var(--margin-middle) var(--padding-container);
+    height: initial;
+    line-height: inherit;
   }
 `;
 

@@ -36,7 +36,7 @@ export const Record: FC = () => {
       <RecordPageWrapper>
         <RecordPageContainer>
           {isLoading ? (
-            <RecordPageMessage> </RecordPageMessage>
+            <RecordPageMessage>Загрузка...</RecordPageMessage>
           ) : (
             <RecordForm />
           )}

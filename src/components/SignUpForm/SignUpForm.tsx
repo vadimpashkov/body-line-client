@@ -4,12 +4,10 @@ import { useForm } from 'react-hook-form';
 import { SignUp } from '../../server';
 import { useAccessToken, useServerMutation } from '../../hooks';
 
-import { Form } from '../Form';
-
 import { InputPhone } from '../InputPhone';
 import { Input } from '../Input';
 
-import { SignUpInput } from './SignUpForm.elements';
+import { SignUpFormWrapper, SignUpInput } from './SignUpForm.elements';
 
 type SignUpFormInputs = {
   username: string;
@@ -21,14 +19,14 @@ type SignUpFormInputs = {
 
 export const SignUpForm: FC = () => {
   const [phone, setPhone] = useState('');
+  const { register, setValue, getValues, handleSubmit, errors } =
+    useForm<SignUpFormInputs>();
   const {
-    register,
-    setValue,
-    getValues,
-    handleSubmit,
-    errors,
-  } = useForm<SignUpFormInputs>();
-  const { mutate: reg, error, data } = useServerMutation('register', SignUp);
+    mutate: reg,
+    error,
+    data,
+    isLoading,
+  } = useServerMutation('register', SignUp);
   const { setToken } = useAccessToken();
 
   const onPhoneChange = (newPhone: string) => {
@@ -56,12 +54,13 @@ export const SignUpForm: FC = () => {
   }
 
   return (
-    <Form
+    <SignUpFormWrapper
       title={{ primary: 'Создание', secondary: 'вашего аккаунта' }}
       button="Зарегистрироваться"
       error={error?.message}
       description="Нажимая кнопку «Зарегистрироваться», вы даете согласие на обработку своих персональных данных."
       onSubmit={handleSubmit(onSubmit)}
+      disabled={isLoading}
     >
       <Input message={errors.username?.message}>
         <InputPhone
@@ -148,6 +147,6 @@ export const SignUpForm: FC = () => {
           })}
         />
       </Input>
-    </Form>
+    </SignUpFormWrapper>
   );
 };

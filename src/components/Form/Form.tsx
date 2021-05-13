@@ -21,6 +21,7 @@ type FormProps = {
   button: string;
   description?: string;
   onSubmit: () => void;
+  disabled: boolean;
 };
 
 export const Form: FC<FormProps> = ({
@@ -31,6 +32,7 @@ export const Form: FC<FormProps> = ({
   button,
   description,
   onSubmit,
+  disabled,
 }: FormProps) => {
   const [isSubmit, setIsSubmit] = useState(false);
 
@@ -41,7 +43,6 @@ export const Form: FC<FormProps> = ({
       onSubmit={(event) => {
         event.preventDefault();
         onSubmit();
-        setIsSubmit(true);
       }}
       className={className}
     >
@@ -52,7 +53,7 @@ export const Form: FC<FormProps> = ({
       </FormTitle>
       <FormInputs>{children}</FormInputs>
       {error && <FormError>{error}</FormError>}
-      <FormButton invert disabled={isSubmit}>
+      <FormButton invert disabled={disabled}>
         {button}
       </FormButton>
       {description && <FormDescription>{description}</FormDescription>}

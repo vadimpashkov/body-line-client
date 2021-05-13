@@ -4,22 +4,21 @@ import { useForm } from 'react-hook-form';
 import { SignIn, SignInRequestType } from '../../server';
 import { useAccessToken, useServerMutation } from '../../hooks';
 
-import { Form } from '../Form';
-
 import { InputPhone } from '../InputPhone';
 import { Input } from '../Input';
 
-import { SignInInput } from './SignInForm.elements';
+import { SignInFormWrapper, SignInInput } from './SignInForm.elements';
 
 export const SignInForm: FC = () => {
   const [phone, setPhone] = useState('');
+  const { register, setValue, handleSubmit, errors } =
+    useForm<SignInRequestType>();
   const {
-    register,
-    setValue,
-    handleSubmit,
-    errors,
-  } = useForm<SignInRequestType>();
-  const { mutate: login, error, data } = useServerMutation('login', SignIn);
+    mutate: login,
+    error,
+    data,
+    isLoading,
+  } = useServerMutation('login', SignIn);
   const { setToken } = useAccessToken();
 
   const onPhoneChange = (newPhone: string) => {
@@ -45,11 +44,12 @@ export const SignInForm: FC = () => {
   }
 
   return (
-    <Form
+    <SignInFormWrapper
       title={{ primary: 'Вход', secondary: 'в ваш аккаунт' }}
       button="Войти"
       error={error?.message}
       onSubmit={handleSubmit(onSubmit)}
+      disabled={isLoading}
     >
       <Input message={errors.username?.message}>
         <InputPhone
@@ -80,6 +80,6 @@ export const SignInForm: FC = () => {
           })}
         />
       </Input>
-    </Form>
+    </SignInFormWrapper>
   );
 };

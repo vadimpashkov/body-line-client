@@ -30,7 +30,7 @@ export const GlobalStyles = createGlobalStyle`
     --margin-little: ${responsive(18, 24)};
     --margin-small: 18px;
 
-    --padding-container: 30px;
+    --padding-container: 20px;
     --padding-form: ${responsive(24, 72)};
     --padding-block: ${responsive(54, 90)};
 
@@ -55,6 +55,7 @@ export const GlobalStyles = createGlobalStyle`
     --size-title-middle: ${responsive(24, 54)};
     --size-title-little: ${responsive(18, 36)};
     --size-title-banner: ${responsive(42, 90)};
+    --size-title-sidebar: ${responsive(18, 32)};
     --size-title-record: ${responsive(24, 36)};
     --size-title-form: ${responsive(32, 54)};
 
