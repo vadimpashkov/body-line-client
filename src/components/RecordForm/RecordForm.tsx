@@ -97,12 +97,12 @@ export const RecordForm: FC = () => {
       date: data.date,
     });
 
-    setValue('messeurId', '');
-    setSelectedMasseur(0);
-    setValue('date', '');
-    setSelectedDate(selectDate);
-    setValue('massageTypeId', '');
-    setSelectedMassageTypeId(0);
+    // setValue('messeurId', '');
+    // setSelectedMasseur(0);
+    // setValue('date', '');
+    // setSelectedDate(selectDate);
+    // setValue('massageTypeId', '');
+    // setSelectedMassageTypeId(0);
   };
 
   const validateDate = (date: Date) => {
