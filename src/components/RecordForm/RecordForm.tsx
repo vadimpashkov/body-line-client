@@ -150,7 +150,7 @@ export const RecordForm: FC = () => {
             disablePast
             format="dd.MM.yyyy HH:mm"
             fullWidth
-            minutesStep={30}
+            minutesStep={60}
             maxDate={new Date(currentDate.setMonth(currentDate.getMonth() + 1))}
             ampm={false}
             InputProps={{
